@@ -1,3 +1,6 @@
+微信小程序类型
+
+
 # ugo
 
 ## Project setup

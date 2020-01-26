@@ -1,42 +1,117 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
-		</view>
-	</view>
+  <view class="content">
+    <!-- 搜索框 -->
+    <view class="search">
+      <view class="input-box">
+        <input type="text" placeholder="输入文字即可搜索" />
+      </view>
+      <!--搜索内容-->
+      <view class="content"></view>
+    </view>
+
+    <view class="swiper">
+      <swiper circular>
+        <swiper-item
+          ><navigator url=""
+            ><image
+              src="../../static/uploads/banner1.png"
+              mode="scaleToFill"
+              lazy-load="false"
+            >
+            </image> </navigator
+        ></swiper-item>
+        <swiper-item
+          ><navigator url=""
+            ><image
+              src="../../static/uploads/banner2.png"
+              mode="scaleToFill"
+              lazy-load="false"
+            >
+            </image> </navigator
+        ></swiper-item>
+        <swiper-item
+          ><navigator url="">
+            <image
+              src="../../static/uploads/banner3.png"
+              mode="scaleToFill"
+              lazy-load="false"
+            >
+            </image></navigator
+        ></swiper-item>
+      </swiper>
+    </view>
+
+    <view class="navs">
+      <navigator url="{{}}">
+        <image src="../../static/uploads/icon_index_nav_1@2x.png"> </image>
+      </navigator>
+      <navigator url="{{}}">
+        <image src="../../static/uploads/icon_index_nav_2@2x.png"> </image>
+      </navigator>
+      <navigator url="{{}}">
+        <image src="../../static/uploads/icon_index_nav_3@2x.png"> </image>
+      </navigator>
+      <navigator url="{{}}">
+        <image src="../../static/uploads/icon_index_nav_4@2x.png"> </image>
+      </navigator>
+    </view>
+
+    <view class="floors">
+      <view class="floor">
+        <view class="title">
+          <image src="../../static/uploads/pic_floor01_title.png"> </image>
+        </view>
+        <view class="container"> </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
-
-		},
-		methods: {
-
-		}
-	}
+export default {
+  data() {
+    return {};
+  },
+  onLoad() {},
+  methods: {}
+};
 </script>
 
-<style>
-	.content {
-		text-align: center;
-		height: 400upx;
+<style lang="less" scoped>
+.search {
+  .input-box {
+    background-color: #ea4451;
+    padding: 20rpx 15rpx;
+    input {
+      background-color: #fff;
+      height: 60rpx;
+    }
+  }
+}
+swiper {
+  height: 340rpx;
+}
+.swiper image {
+  width: 750rpx;
+  height: 340rpx;
+}
+.navs {
+  height: 192rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  navigator {
+    width: 128rpx;
+    height: 140rpx;
+  }
+}
+.floors {
+	.floor{
+		.title{
+			width: 750rpx;
+			height: 60rpx;
+		}
 	}
-
-	.logo {
-		height: 200upx;
-		width: 200upx;
-		margin-top: 200upx;
-	}
-
-	.title {
-		font-size: 36upx;
-		color: #8f8f94;
-	}
+}
 </style>

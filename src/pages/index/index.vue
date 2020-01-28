@@ -5,124 +5,40 @@
 
     <view class="swiper">
       <swiper circular>
-        <swiper-item
-          ><navigator url=""
-            ><image
-              src="../../static/uploads/banner1.png"
-              mode="scaleToFill"
-              lazy-load="false"
-            >
-            </image> </navigator
-        ></swiper-item>
-        <swiper-item
-          ><navigator url=""
-            ><image
-              src="../../static/uploads/banner2.png"
-              mode="scaleToFill"
-              lazy-load="false"
-            >
-            </image> </navigator
-        ></swiper-item>
-        <swiper-item
-          ><navigator url="">
-            <image
-              src="../../static/uploads/banner3.png"
-              mode="scaleToFill"
-              lazy-load="false"
-            >
-            </image></navigator
+        <swiper-item v-for="item in swiperlist" :key="item.goods_id"
+          ><navigator :url="item.navigator_url"
+            ><image :src="item.image_src"> </image> </navigator
         ></swiper-item>
       </swiper>
     </view>
 
     <view class="navs">
-      <navigator url="{{}}">
-        <image src="../../static/uploads/icon_index_nav_1@2x.png"> </image>
-      </navigator>
-      <navigator url="{{}}">
-        <image src="../../static/uploads/icon_index_nav_2@2x.png"> </image>
-      </navigator>
-      <navigator url="{{}}">
-        <image src="../../static/uploads/icon_index_nav_3@2x.png"> </image>
-      </navigator>
-      <navigator url="{{}}">
-        <image src="../../static/uploads/icon_index_nav_4@2x.png"> </image>
+      <navigator
+        :open-type="item.open_type"
+        url="/pages/category/main"
+        v-for="item in navlist"
+        :key="item.name"
+      >
+        <image :src="item.image_src"> </image>
       </navigator>
     </view>
 
     <view class="floors">
-      <view class="floor">
+      <view class="floor" :key="key" v-for="(item,key) in floorlist">
         <view class="title">
-          <image src="../../static/uploads/pic_floor01_title.png"> </image>
+          <image :src="item.floor_title.image_src"></image>
         </view>
         <view class="item">
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor02_1@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor02_2@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor02_3@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor02_4@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor02_5@2x.png"> </image>
+          <navigator url=""
+		  v-for="(params,index) in item.product_list"
+		  :key="index"
+		  >
+            <image :src="params.image_src"> </image>
           </navigator>
         </view>
-        <view class="container"> </view>
-      </view>
-
-      <view class="floor">
-        <view class="title">
-          <image src="../../static/uploads/pic_floor02_title.png"> </image>
-        </view>
-        <view class="item">
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor03_1@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor03_2@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor03_3@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor03_4@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor03_5@2x.png"> </image>
-          </navigator>
-        </view>
-        <view class="container"> </view>
-      </view>
-
-      <view class="floor">
-        <view class="title">
-          <image src="../../static/uploads/pic_floor03_title.png"> </image>
-        </view>
-        <view class="item">
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor01_1@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor01_2@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor01_3@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor01_4@2x.png"> </image>
-          </navigator>
-          <navigator url="">
-            <image src="../../static/uploads/pic_floor01_5@2x.png"> </image>
-          </navigator>
-        </view>
-        <view class="container"> </view>
       </view>
     </view>
+       <i class="top"></i>
   </view>
 </template>
 
@@ -131,44 +47,63 @@ import search from "@/components/search.vue";
 export default {
   data() {
     return {
-      pageheight: "auto"
+      pageheight: "auto",
+      swiperlist: [],
+      navlist: [],
+      floorlist: []
     };
   },
   methods: {
     disabledscroll(params) {
       console.log("父组件触发", params);
-      this.pageheight = params.pageHeight;
+      this.pageheight = params.pageHeight; //修改页面高度，防止滚动
     },
-  async  getswiper() {
-    //   uni.request({
-    //     url: "http://ugo.botue.com/api/public/v1/home/swiperdata",
-    //     success(info) {
-    //       console.log(info);
-    //     }
-	//   });老式方法
-	//    const res=await uni.request({
-    //     url: "http://ugo.botue.com/api/public/v1/home/swiperdata"
-	//   });
-	//   console.log(res);
-	//   function http(baseurl){
-	// 	  return function(url){
-	// 		  uni.request({
-	// 			  url:baseurl+url
-	// 		  })
-	// 	  }
-	//   }
-	//   http('http://www.baidu.com')('/api/123')
-  const {message}=await this.http({url:'/api/public/v1/home/swiperdata'})
-  console.log(message);
-  
+    async getswiper() {
+      //   uni.request({
+      //     url: "http://ugo.botue.com/api/public/v1/home/swiperdata",
+      //     success(info) {
+      //       console.log(info);
+      //     }
+      //   });老式方法
+      //    const res=await uni.request({
+      //     url: "http://ugo.botue.com/api/public/v1/home/swiperdata"
+      //   });
+      //   console.log(res);
+      //   function http(baseurl){
+      // 	  return function(url){
+      // 		  uni.request({
+      // 			  url:baseurl+url
+      // 		  })
+      // 	  }
+      //   }
+      //   http('http://www.baidu.com')('/api/123')
+      const { message } = await this.http({
+        url: "/api/public/v1/home/swiperdata"
+      });
+      this.swiperlist = message;
+    },
+    async getnav() {
+      const { message } = await this.http({
+        url: "/api/public/v1/home/catitems"
+      });
+      // console.log(message);
+      this.navlist = message;
+    },
+    async getfloor() {
+      const { message } = await this.http({
+        url: "/api/public/v1/home/floordata"
+      });
+      this.floorlist = message;
+    }
   },
-    getnav() {},
-    getfloor() {}
+  onPullDownRefresh(){
+    console.log('用户下拉刷新了');//监听用户下拉刷新
+    uni.stopPullDownRefresh()  //api关闭下拉交互,这是异步的，添加async和await同步
   },
   onLoad() {
     //当前页面加载发送请求，拿数据
     this.getswiper();
-    this, getnav();
+    this.getnav();
     this.getfloor();
   },
 
@@ -233,5 +168,16 @@ swiper {
   navigator:nth-child(5) {
     margin-top: 13rpx;
   }
+}
+.top{
+	background-image: url('../../static/顶部.png');
+	background-size: contain;
+	width: 60rpx;
+	height: 60rpx;
+	position: fixed;right: 50rpx;
+	bottom: 120rpx;
+	background-color: #fff;
+	border-radius: 50%;
+	opacity:0.4;
 }
 </style>

@@ -52,7 +52,7 @@ export default {
       background-image: url("../static/images/icon_search@2x.png");
       width: 33rpx;
       height: 33rpx;
-      left: 200rpx;
+      left: 190rpx;
       top: 35rpx;
       background-size: contain;
     }
@@ -73,7 +73,7 @@ export default {
       background-image: url("../static/images/icon_search@2x.png");
       width: 33rpx;
       height: 33rpx;
-      left: 157rpx;
+      left: 147rpx;
       top: 35rpx;
       background-size: contain;
     }

@@ -11,7 +11,7 @@ export default function(config) {
   return function(vue) {
     // console.log(vue);
     vue.prototype.http = async function(params) {
-      // console.log('全局方法添加上了');
+      // console.log('全局方法添加上了',params);
       const { url, method, data } = params;
       uni.showLoading({title:'数据加载中!'})//数据发送前給用户提示
       const res=await uni.request({

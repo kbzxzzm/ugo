@@ -24,21 +24,24 @@
     </view>
 
     <view class="floors">
-      <view class="floor" :key="key" v-for="(item,key) in floorlist">
+      <view class="floor" :key="key" v-for="(item, key) in floorlist">
         <view class="title">
           <image :src="item.floor_title.image_src"></image>
         </view>
         <view class="item">
-          <navigator url=""
-		  v-for="(params,index) in item.product_list"
-		  :key="index"
-		  >
+          <navigator
+            url=""
+            v-for="(params, index) in item.product_list"
+            :key="index"
+          >
             <image :src="params.image_src"> </image>
           </navigator>
         </view>
       </view>
     </view>
-       <i class="top"></i>
+    <i class="top"
+    v-if="scrollTop>100"
+     @click="top"></i>
   </view>
 </template>
 
@@ -50,10 +53,14 @@ export default {
       pageheight: "auto",
       swiperlist: [],
       navlist: [],
-      floorlist: []
+      floorlist: [],
+      scrollTop:0//设置后只能隐藏，这时必须事件监听才能知道用户做了什么
     };
   },
   methods: {
+    top(){
+     uni.pageScrollTo({scrollTop:0})
+    },
     disabledscroll(params) {
       console.log("父组件触发", params);
       this.pageheight = params.pageHeight; //修改页面高度，防止滚动
@@ -80,7 +87,7 @@ export default {
       const { message } = await this.http({
         url: "/api/public/v1/home/swiperdata"
       });
-      this.swiperlist = message;
+      this.swiperlist = message;//赋值给list利于操作
     },
     async getnav() {
       const { message } = await this.http({
@@ -96,9 +103,12 @@ export default {
       this.floorlist = message;
     }
   },
-  onPullDownRefresh(){
-    console.log('用户下拉刷新了');//监听用户下拉刷新
-    uni.stopPullDownRefresh()  //api关闭下拉交互,这是异步的，添加async和await同步
+  async onPullDownRefresh() {
+    console.log("用户下拉刷新了"); //监听用户下拉刷新
+    await this.getswiper();
+    await this.getnav();
+    await this.getfloor();
+    uni.stopPullDownRefresh(); //api关闭下拉交互,这是异步的，添加async和await同步
   },
   onLoad() {
     //当前页面加载发送请求，拿数据
@@ -106,7 +116,10 @@ export default {
     this.getnav();
     this.getfloor();
   },
-
+onPageScroll(ev){
+console.log(ev);//监听滚动到哪了
+this.scrollTop=ev.scrollTop//修改data中的值
+},
   components: {
     search
   }
@@ -169,15 +182,16 @@ swiper {
     margin-top: 13rpx;
   }
 }
-.top{
-	background-image: url('../../static/顶部.png');
-	background-size: contain;
-	width: 60rpx;
-	height: 60rpx;
-	position: fixed;right: 50rpx;
-	bottom: 120rpx;
-	background-color: #fff;
-	border-radius: 50%;
-	opacity:0.4;
+.top {
+  background-image: url("../../static/顶部.png");
+  background-size: contain;
+  width: 60rpx;
+  height: 60rpx;
+  position: fixed;
+  right: 50rpx;
+  bottom: 120rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.4;
 }
 </style>

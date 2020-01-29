@@ -1,22 +1,4 @@
 微信小程序类型
 
-
-# ugo
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+ npm run dev:mp-weixin 
+ 并在微信小程序开发者工具打开dist下的mp-weixin导入项目即可

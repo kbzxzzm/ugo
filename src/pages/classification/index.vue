@@ -8,8 +8,8 @@
       <view class="sup">
         <scroll-view scroll-y>
           <text
-            :class="{active:catindex===index}"
             @click="clickcat(index)"
+            :class="{ active: catindex === index }"
             :key="index"
             v-for="(item, index) in catlist"
             >{{ item.cat_name }}</text
@@ -24,165 +24,23 @@
             src="http://static.botue.com/ugo/uploads/category.png"
             class="thumb"
           ></image>
-          <view class="children">
-            <view class="title">电视</view>
+          <view
+            class="children"
+            v-for="(item, index) in childrens"
+            :key="index"
+          >
+            <view class="title">{{ item.cat_name }}</view>
             <!-- 品牌 -->
             <view class="brands">
-              <navigator url="/pages/list/index">
+              <navigator
+                url="/pages/list/index"
+                :key="index"
+                v-for="(child, index) in item.children"
+              >
                 <image
-                  src="http://static.botue.com/ugo/uploads/brand_1.jpg"
+                  :src="child.cat_icon"
                 ></image>
-                <text>曲面电视</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_2.jpg"
-                ></image>
-                <text>海信</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_3.jpg"
-                ></image>
-                <text>创维</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_4.jpg"
-                ></image>
-                <text>夏普</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_5.jpg"
-                ></image>
-                <text>TCL</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_6.jpg"
-                ></image>
-                <text>PPTV</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_7.jpg"
-                ></image>
-                <text>小米</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_8.jpg"
-                ></image>
-                <text>长虹</text>
-              </navigator>
-            </view>
-          </view>
-          <view class="children">
-            <view class="title">电视</view>
-            <!-- 品牌 -->
-            <view class="brands">
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_1.jpg"
-                ></image>
-                <text>曲面电视</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_2.jpg"
-                ></image>
-                <text>海信</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_3.jpg"
-                ></image>
-                <text>创维</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_4.jpg"
-                ></image>
-                <text>夏普</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_5.jpg"
-                ></image>
-                <text>TCL</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_6.jpg"
-                ></image>
-                <text>PPTV</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_7.jpg"
-                ></image>
-                <text>小米</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_8.jpg"
-                ></image>
-                <text>长虹</text>
-              </navigator>
-            </view>
-          </view>
-          <view class="children">
-            <view class="title">电视</view>
-            <!-- 品牌 -->
-            <view class="brands">
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_1.jpg"
-                ></image>
-                <text>曲面电视</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_2.jpg"
-                ></image>
-                <text>海信</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_3.jpg"
-                ></image>
-                <text>创维</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_4.jpg"
-                ></image>
-                <text>夏普</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_5.jpg"
-                ></image>
-                <text>TCL</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_6.jpg"
-                ></image>
-                <text>PPTV</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_7.jpg"
-                ></image>
-                <text>小米</text>
-              </navigator>
-              <navigator url="/pages/list/index">
-                <image
-                  src="http://static.botue.com/ugo/uploads/brand_8.jpg"
-                ></image>
-                <text>长虹</text>
+                <text>{{child.cat_name}}</text>
               </navigator>
             </view>
           </view>
@@ -196,6 +54,11 @@ import search from "@/components/search";
 export default {
   components: {
     search
+  },
+  computed:{
+    childrens(){
+        return this.catlist.length && this.catlist[this.catindex].children//返回数组长度以及数组对应索引子级长度
+    }
   },
   data() {
     return {
@@ -224,18 +87,15 @@ export default {
 scroll-view {
   height: 100%;
 }
-
 .category {
   display: flex;
   width: 100%;
   position: absolute;
   top: 100rpx;
   bottom: 0;
-
   .sup {
     width: 196rpx;
     background-color: #f4f4f4;
-
     text {
       display: block;
       height: 100rpx;
@@ -244,16 +104,13 @@ scroll-view {
       font-size: 27rpx;
       color: #333;
       border-bottom: 1rpx solid #eee;
-
       &:last-child {
         border-bottom: none;
       }
-
       &.active {
         background-color: #fff;
         color: #ea4451;
         position: relative;
-
         &::before {
           content: "";
           display: block;
@@ -261,7 +118,6 @@ scroll-view {
           height: 60rpx;
           transform: translateY(-50%);
           background-color: #ea4451;
-
           position: absolute;
           left: 0;
           top: 50%;
@@ -269,31 +125,25 @@ scroll-view {
       }
     }
   }
-
   .sub {
     flex: 1;
     padding: 20rpx 18rpx;
-
     .thumb {
       width: 100%;
       height: 180rpx;
     }
-
     .children {
       text-align: center;
       color: #333;
-
       .title {
         display: inline-block;
         margin: 40rpx 0 20rpx;
         font-size: 30rpx;
-
         &::before {
           content: "/";
           margin-right: 20rpx;
           color: #666;
         }
-
         &::after {
           content: "/";
           margin-left: 20rpx;
@@ -301,21 +151,17 @@ scroll-view {
         }
       }
     }
-
     .brands {
       display: flex;
       flex-wrap: wrap;
-
       navigator {
         width: 33%;
         margin-bottom: 20rpx;
       }
-
       image {
         width: 120rpx;
         height: 120rpx;
       }
-
       text {
         display: block;
         font-size: 24rpx;

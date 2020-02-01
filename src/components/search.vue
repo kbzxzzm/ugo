@@ -65,13 +65,13 @@ export default {
     },
     async search() {
       const { message } = await this.http({
-        url: "/api/public/v1/goods/qsearch",
+        url:'/api/public/v1/goods/qsearch',
         data: {
-          query: this.query
+          query: this.keywords
         }
       });
       this.searchlist = message;
-      console.log(message);
+      // console.log(message);
     },
     foucs() {
       this.focus = true;

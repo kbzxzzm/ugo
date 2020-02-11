@@ -33,7 +33,7 @@
             <!-- 品牌 -->
             <view class="brands">
               <navigator
-                url="/pages/list/index"
+                :url="'/pages/list/index?query='+child.cat_name"
                 :key="index"
                 v-for="(child, index) in item.children"
               >

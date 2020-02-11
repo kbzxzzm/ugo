@@ -28,11 +28,11 @@
       <!-- 结果 -->
       <scroll-view scroll-y class="result" v-if="searchlist.length">
         <navigator
-          url="/pages/goods/index"
           v-for="(item, index) in searchlist"
           :key="index"
+          :url="'/pages/goods/index?id='+item.goods_id"
           >{{ item.goods_name }}</navigator
-        >
+        > 
       </scroll-view>
     </div>
   </view>
@@ -51,6 +51,7 @@ export default {
   methods: {
     clear() {
       this.history = [];
+      uni.removeStorageSync("history");
     },
     golist() {
       console.log("用户敲击回车了/return");
@@ -60,12 +61,13 @@ export default {
       uni.setStorageSync("history", this.history);
       // this.history.push(this.keywords);
       uni.navigateTo({
-       url: '/pages/list/index?query=' + this.keywords
+        url: "/pages/list/index?query=" + this.keywords
       });
+      this.keywords = "";
     },
     async search() {
       const { message } = await this.http({
-        url:'/api/public/v1/goods/qsearch',
+        url: "/api/public/v1/goods/qsearch",
         data: {
           query: this.keywords
         }

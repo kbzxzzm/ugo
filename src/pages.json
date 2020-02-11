@@ -14,6 +14,15 @@
       }
     },
     {
+      "path": "pages/list/index"
+    },
+    {
+      "path": "pages/goods/index"
+    },
+    {
+      "path": "pages/cart/index"
+    },
+    {
       "path": "pages/user/index",
       "style": {
         "navigationBarTitleText": "个人中心"
@@ -51,7 +60,7 @@
       },
       {
         "text": "购物车",
-        "pagePath": "pages/shopcars/index",
+        "pagePath": "pages/cart/index",
         "iconPath": "static/tabs/icon_cart@3x.png",
         "selectedIconPath": "static/tabs/icon_cart_active@3x.png"
       },

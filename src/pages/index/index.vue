@@ -2,20 +2,18 @@
   <view class="content" :style="{ overflow: 'hidden', height: pageheight }">
     <!-- 搜索框,自定义组件 -->
     <search @search="disabledscroll"></search>
-
     <view class="swiper">
       <swiper circular>
         <swiper-item v-for="item in swiperlist" :key="item.goods_id"
-          ><navigator :url="item.navigator_url"
+          ><navigator :url="'/pages/goods/index?id='+item.goods_id"
             ><image :src="item.image_src"> </image> </navigator
         ></swiper-item>
       </swiper>
     </view>
-
     <view class="navs">
       <navigator
-        :open-type="item.open_type"
-        url="/pages/category/main"
+        :open-type="item.open_type||'navigate'"
+        :url="item.open_type ? '/pages/classification/index':'/pages/list/index?query='+item.name"
         v-for="item in navlist"
         :key="item.name"
       >
@@ -30,7 +28,7 @@
         </view>
         <view class="item">
           <navigator
-            url=""
+            :url="'/pages/list/index?query='+params.name"
             v-for="(params, index) in item.product_list"
             :key="index"
           >
